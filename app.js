@@ -1,3 +1,4 @@
+const form = document.querySelector(`form`);
 const searchBar = document.querySelector(`input`);
 const championMasteryDisplay = document.querySelector(`ol`);
 
@@ -33,4 +34,4 @@ function displayTopChamps(champArray) {
 	console.log(champArray);
 }
 
-getSummoner();
+form.addEventListener(`submit`, getSummoner);
