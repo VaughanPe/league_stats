@@ -22,6 +22,7 @@ async function insertMastery(summonerName){
     let champList = []
     let skillHolder = []
      const profile = document.querySelector(".profile")
+     const  topChamp = document.querySelector(".topChamps").querySelector("ol")
 
      //http://ddragon.leagueoflegends.com/cdn/11.7.1/img/profileicon/${summoner.profileIconId}.png
     
@@ -49,6 +50,8 @@ async function insertMastery(summonerName){
             }
         })
     });
+
+    topChamp.querySelectorAll("li")[0].querySelector("h3").innerHTML = `<b>${skillHolder[0].name}</b>`
    console.log(summoner);
     
 }
