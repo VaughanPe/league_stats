@@ -27,6 +27,12 @@ function getTop5Champ(champArray) {
 			counter++;
 		}
 	}
+
+	displayTopChamps(newChampArray);
+}
+
+function displayTopChamps(champArray) {
+	console.log(champArray);
 }
 
 getSummoner();
