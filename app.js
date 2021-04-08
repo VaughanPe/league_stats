@@ -18,10 +18,10 @@ async function getChampionMastery(id) {
 	getTop5Champ(data);
 }
 
-function getTop5Champ(champArray) {
+function getTopChamps(champArray) {
 	let newChampArray;
 	let counter = 1;
-	for (let i = 0; i < 4; i++) {
+	for (let i = 0; i < 3; i++) {
 		if (champArray.length > counter) {
 			newChampArray.push(champArray[i]);
 			counter++;
