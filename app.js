@@ -15,6 +15,18 @@ async function getSummoner() {
 async function getChampionMastery(id) {
 	const res = await fetch(mastery_url + id);
 	const data = await res.json();
+	getTop5Champ(data);
+}
+
+function getTop5Champ(champArray) {
+	let newChampArray;
+	let counter = 1;
+	for (let i = 0; i < 4; i++) {
+		if (champArray.length > counter) {
+			newChampArray.push(champArray[i]);
+			counter++;
+		}
+	}
 }
 
 getSummoner();
