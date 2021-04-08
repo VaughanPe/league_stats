@@ -5,8 +5,8 @@ const championMasteryDisplay = document.querySelector(`ol`);
 const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
 const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
 
-async function getSummoner() {
-  const res = await fetch(summoner_url + `testname`);
+async function getSummoner(name) {
+  const res = await fetch(summoner_url + `name`);
 	const data = await res.json();
 	getChampionMastery(data.id);
 }
@@ -34,4 +34,7 @@ function displayTopChamps(champArray) {
 	console.log(champArray);
 }
 
-form.addEventListener(`submit`, getSummoner);
+form.addEventListener(`submit`, e => {
+	e.preventDefault();
+	getSummoner(searchBar.Value);
+});
