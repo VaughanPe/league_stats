@@ -23,7 +23,7 @@ async function getChampionMastery(id) {
 }
 
 function getTopChamps(champArray) {
-	let newChampArray;
+	let newChampArray = [];
 	let counter = 1;
 	for (let i = 0; i < 3; i++) {
 		if (champArray.length > counter) {
@@ -37,6 +37,17 @@ function getTopChamps(champArray) {
 
 function displayTopChamps(champArray) {
 	console.log(champArray);
+	let img = ``;
+	let mp = ``;
+	championMasteryDisplay.innerHTML = ``;
+	championMasteryDisplay.insertAdjacentHTML(`beforeend`, `
+		<li>
+			<h3>Champion</h3>
+			<img src="${img}" alt="Champion">
+			<h4>Mastery Points: ${mp}</h4>
+		</li>
+	`);
+	
 }
 
 form.addEventListener(`submit`, e => {
