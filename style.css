@@ -23,6 +23,7 @@ header {
 
 header h1 {
     padding: 20px;
+    color: #C9B9CB;
 }
 
 header form {
@@ -47,6 +48,10 @@ header form button {
     background-color: #C9B9CB;
 }
 
+.upper-wrap {
+    padding-top: 2px;
+}
+
 /*Stats/Account Section*/
 
 .account-spread {
@@ -58,10 +63,7 @@ header form button {
     text-align: center;
     padding: 10px;
     margin: 15px;
-    background-image: url("https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg");
-    background-size: 100% 100%;
-    
-    
+    background-color: #C9B9CB;
 }
 
 .profile img {
@@ -92,11 +94,6 @@ header form button {
     font-weight: 700;
 }
 
-.stats td {
-}
-
 .stats table {
     width: 100%;
 }
-
-
