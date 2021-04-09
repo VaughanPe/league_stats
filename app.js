@@ -5,6 +5,7 @@ const championMasteryDisplay = document.querySelector(`ol`);
 const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
 const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
 const championStats_url = `http://ddragon.leagueoflegends.com/cdn/11.7.1/data/en_US/champion.json`;
+const champIcon_url = `http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/`;
 
 async function getSummoner(name) {
   const res = await fetch(summoner_url + name);
@@ -38,14 +39,11 @@ function getTopChamps(champArray) {
 async function getChampStats(champArray) {
 	const res = await fetch(championStats_url);
 	const data = await res.json();
-	console.log(data);
 	let newChampArray = [];
 	champArray.forEach(champ => {
-		for (const champData in data) {
-			if (champ.id === champData.championId) {
-				console.log(champ.id, champData.championId)
-				console.log(champ, champData)
-				newChampArray.push({champ, champData})
+		for (const champData in data.data) {
+			if (champ.championId === parseInt(data.data[champData].key)) {
+				newChampArray.push({champ, champData: data.data[champData]})
 			}
 		}
 	});
@@ -56,8 +54,8 @@ async function getChampStats(champArray) {
 function displayTopChamps(champArray) {
 	console.log(champArray);
 	championMasteryDisplay.innerHTML = ``;
-	for (const champ in champArray) {
-		let img = ``;
+	champArray.forEach( champ => {
+		let img = champIcon_url + champ.champData.key + `.png`;
 		let mp = ``;
 		championMasteryDisplay.insertAdjacentHTML(`beforeend`, `
 		<li>
@@ -66,7 +64,7 @@ function displayTopChamps(champArray) {
 			<h4>Mastery Points: ${mp}</h4>
 		</li>
 		`);
-	}
+	});
 }
 
 form.addEventListener(`submit`, e => {
