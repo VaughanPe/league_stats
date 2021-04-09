@@ -23,7 +23,6 @@ header {
 
 header h1 {
     padding: 20px;
-    color: #C9B9CB;
 }
 
 header form {
@@ -46,10 +45,6 @@ header form button {
     padding: 2px;
     border-radius: 3px;
     background-color: #C9B9CB;
-}
-
-.upper-wrap {
-    padding-top: 2px;
 }
 
 /*Stats/Account Section*/
@@ -95,6 +90,9 @@ header form button {
 
 .stats h1 {
     font-weight: 700;
+}
+
+.stats td {
 }
 
 .stats table {
