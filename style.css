@@ -4,8 +4,9 @@
 }
 
 body {
-    background-color: #080708;
+    background-color: hsl(300, 7%, 3%);
     color: #002129;
+    font-family: "Kumbh Sans";
 }
 
 /*Header section*/
@@ -13,8 +14,6 @@ header {
     margin: 0 auto;
     text-align: center;
     display: block;
-    color: #002129;
-    font-family: "Kumbh Sans";
 }
 
 .headerContent {
@@ -24,6 +23,7 @@ header {
 
 header h1 {
     padding: 20px;
+    color: #C9B9CB;
 }
 
 header form {
@@ -46,6 +46,10 @@ header form button {
     padding: 2px;
     border-radius: 3px;
     background-color: #C9B9CB;
+}
+
+.upper-wrap {
+    padding-top: 2px;
 }
 
 /*Stats/Account Section*/
@@ -71,6 +75,30 @@ header form button {
     display: block;
 }
 
+.profile h2 {
+    font-weight: 400;
+    padding: 10px 0;
+}
+
 .pfp {
     border-radius: 50px;
 }
+
+/*General Stats Section*/
+
+.stats {
+    text-align: center;
+    padding: 10px;
+    margin: 15px;
+    background-color: #C9B9CB;
+}
+
+.stats h1 {
+    font-weight: 700;
+}
+
+.stats table {
+    width: 100%;
+}
+
+
