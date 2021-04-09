@@ -4,8 +4,9 @@
 }
 
 body {
-    background-color: #080708;
-    color: #B1EDE8;
+    background-color: hsl(300, 7%, 3%);
+    color: #002129;
+    font-family: "Kumbh Sans";
 }
 
 /*Header section*/
@@ -13,7 +14,6 @@ header {
     margin: 0 auto;
     text-align: center;
     display: block;
-    color: #002129;
 }
 
 .headerContent {
@@ -23,6 +23,7 @@ header {
 
 header h1 {
     padding: 20px;
+    color: #C9B9CB;
 }
 
 header form {
@@ -46,3 +47,55 @@ header form button {
     border-radius: 3px;
     background-color: #C9B9CB;
 }
+
+.upper-wrap {
+    padding-top: 2px;
+}
+
+/*Stats/Account Section*/
+
+.account-spread {
+    background-color: #4E4187;
+    margin: 10px; 
+}
+
+.profile {
+    text-align: center;
+    padding: 10px;
+    margin: 15px;
+    background-color: #C9B9CB;
+}
+
+.profile img {
+    max-width: 60%;
+    margin: 0 auto;
+    display: block;
+}
+
+.profile h2 {
+    font-weight: 400;
+    padding: 10px 0;
+}
+
+.pfp {
+    border-radius: 50px;
+}
+
+/*General Stats Section*/
+
+.stats {
+    text-align: center;
+    padding: 10px;
+    margin: 15px;
+    background-color: #C9B9CB;
+}
+
+.stats h1 {
+    font-weight: 700;
+}
+
+.stats table {
+    width: 100%;
+}
+
+
