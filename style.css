@@ -98,4 +98,27 @@ header form button {
     width: 100%;
 }
 
+/*Top Champs Section*/
+
+.top-champs {
+    padding: 10px;
+    margin: 15px;
+    background-color: #C9B9CB;
+}
+
+.top-champs h1 {
+    text-align: center;
+}
+
+.top-champs ol {
+    list-style: none;
+    display: flex;
+    margin-top: 15px;
+    justify-content: space-between;
+}
+
+.top-champs li {
+    max-width: 30%;
+    text-align: center;
+}
 
