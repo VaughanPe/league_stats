@@ -1,7 +1,7 @@
 const form = document.querySelector(`form`);
 const searchBar = document.querySelector(`input`);
 const championMasteryDisplay = document.querySelector(`ol`);
-//test
+//test 2
 
 const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
 const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
