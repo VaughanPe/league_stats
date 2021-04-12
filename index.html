@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js" ></script>
     <title>Document</title>
 </head>
 
@@ -88,78 +89,69 @@
                             </tbody>
                         </table>
                     </div>
-                    <!--Graph below, selectable stats-->
                 </div>
             </div>
-            <div class="topChamps">
+            <div class="top-champs">
                 <h1>Top Champions</h1>
                 <ol>
                     <li>
                         <h3>Champion</h3>
                         <img src="https://via.placeholder.com/75" alt="Champion">
-                        <h4>Mastery Points</h4>
+                        <h5>Mastery Points</h5>
                     </li>
                     <li>
                         <h3>Champion</h3>
                         <img src="https://via.placeholder.com/75" alt="Champion">
-                        <h4>Mastery Points</h4>
+                        <h5>Mastery Points</h5>
                     </li>
                     <li>
                         <h3>Champion</h3>
                         <img src="https://via.placeholder.com/75" alt="Champion">
-                        <h4>Mastery Points</h4>
+                        <h5>Mastery Points</h5>
                     </li>
                 </ol>
             </div>
         </div>
         <div class="right">
-            <div class="recentMatches">
-                <ul>
-                    <li>
+            <div class="graph-contain">
+                <h1>"Stat" over time</h1>
+                <canvas id="match" width="100" height="50"></canvas>
+            </div>
+            <div class="recent-matches">
+                <ul class="match-holder">
+                    <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>Damage</h5>
-                        <h5>Gold</h5>
                         <h5>KDA</h5>
                         <h5>CS</h5>
                     </li>
-                    <li>
+                    <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>Damage</h5>
-                        <h5>Gold</h5>
                         <h5>KDA</h5>
                         <h5>CS</h5>
                     </li>
-                    <li>
+                    <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>Damage</h5>
-                        <h5>Gold</h5>
                         <h5>KDA</h5>
                         <h5>CS</h5>
                     </li>
-                    <li>
+                    <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>Damage</h5>
-                        <h5>Gold</h5>
                         <h5>KDA</h5>
                         <h5>CS</h5>
                     </li>
-                    <li>
+                    <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>Damage</h5>
-                        <h5>Gold</h5>
                         <h5>KDA</h5>
                         <h5>CS</h5>
                     </li>
-                    <li>
+                    <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>Damage</h5>
-                        <h5>Gold</h5>
                         <h5>KDA</h5>
                         <h5>CS</h5>
                     </li>
@@ -167,6 +159,8 @@
             </div>
         </div>
     </section>
-</body>w
+
+   
+</body>
 
 </html>

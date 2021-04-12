@@ -95,5 +95,73 @@ header form button {
 }
 
 .stats table {
-    width: 100%;
+    width: 100%;    
 }
+
+/*Graph Section*/
+
+.graph-contain {
+    background-color: #C9B9CB;
+    padding: 10px;
+    margin: 15px;
+    text-align: center;
+}
+
+ #match {
+    width: 90%;
+    height: 200px;
+    border: solid #002129 5px;
+    margin: 0 auto;
+    display: block;
+ }
+
+/*Top Champs Section*/
+
+.top-champs {
+    padding: 10px;
+    margin: 15px;
+    background-color: #C9B9CB;
+}
+
+.top-champs h1 {
+    text-align: center;
+}
+
+.top-champs ol {
+    list-style: none;
+    display: flex;
+    margin-top: 15px;
+    justify-content: space-between;
+}
+
+.top-champs li {
+    max-width: 30%;
+    text-align: center;
+}
+
+/*Recent Matches Section*/
+
+.recent-matches {
+    padding: 10px;
+    margin: 15px;
+    background-color: #C9B9CB;
+}
+
+.recent-matches ul{
+    list-style: none;
+}
+
+.match-holder li {
+    display: flex;
+    border: solid #000000 2px;
+    border-radius: 2px;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.match h5 {
+text-decoration: underline;
+}
+
