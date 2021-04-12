@@ -111,8 +111,22 @@ header form button {
     width: 90%;
     height: 200px;
     border: solid #002129 5px;
+    background-color: #FFFFFF;
     margin: 0 auto;
     display: block;
+ }
+
+ .graph-buttons {
+     margin-top: 5px;
+     width: 100%;
+ }
+
+ .graph-buttons button {
+    border: solid 1px #002129;
+    padding: 3  px;
+    border-radius: 3px;
+    background-color: #C9B9CB;
+    font-family: "Kumbh Sans";
  }
 
 /*Top Champs Section*/
@@ -137,6 +151,9 @@ header form button {
 .top-champs li {
     max-width: 30%;
     text-align: center;
+    background-color: #8777a5;
+    padding: 10px;
+    border-radius: 3px;
 }
 
 /*Recent Matches Section*/
@@ -153,8 +170,8 @@ header form button {
 
 .match-holder li {
     display: flex;
-    border: solid #000000 2px;
-    border-radius: 2px;
+    background-color: #8777a5;
+    border-radius: 3px;
     justify-content: space-around;
     align-items: center;
     padding: 5px;

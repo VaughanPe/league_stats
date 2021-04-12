@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
+    <script defer src="app.js"></script>
     <title>Document</title>
 </head>
 
@@ -17,11 +17,6 @@
         <div class="headerContent">
             <h1>Summoner Lookup</h1>
             <form>
-                <select>
-                    <option>NA</option>
-                    <option>EU</option>
-                    <option>AS</option>
-                </select>
                 <input type="text" placeholder="Type your Summoner ID here">
                 <button type="submit">Submit</button>
             </form>
@@ -115,31 +110,37 @@
             <div class="graph-contain">
                 <h1>"Stat" over time</h1>
                 <canvas id="match"></canvas>
+                <form class="graph-buttons">
+                    <button type="submit">Damage</button>
+                    <button type="submit">Gold</button>
+                    <button type="submit">CS</button>
+                    <button type="submit">Vision</button>
+                </form>
             </div>
             <div class="recent-matches">
                 <ul class="match-holder">
                     <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>KDA</h5>
+                        <h5>K/D/A</h5>
                         <h5>CS</h5>
                     </li>
                     <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>KDA</h5>
+                        <h5>K/D/A</h5>
                         <h5>CS</h5>
                     </li>
                     <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>KDA</h5>
+                        <h5>K/D/A</h5>
                         <h5>CS</h5>
                     </li>
                     <li class="match">
                         <img src="https://via.placeholder.com/75" alt="Champion Played">
                         <h5>Mode</h5>
-                        <h5>KDA</h5>
+                        <h5>K/D/A</h5>
                         <h5>CS</h5>
                     </li>
                     <li class="match">
