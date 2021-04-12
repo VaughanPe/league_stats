@@ -56,6 +56,10 @@ header form input{
     margin: 10px; 
 }
 
+.right {
+    width: 100%;
+}
+
 .profile {
     text-align: center;
     padding: 10px;
@@ -153,6 +157,11 @@ header form input{
     border-radius: 3px;
 }
 
+.top-champs h3 {
+    border-bottom: solid 1px black;
+    margin-bottom: 7px;
+}
+
 /*Recent Matches Section*/
 
 .recent-matches {
@@ -175,6 +184,12 @@ header form input{
     margin: 5px 0;
 }
 
+.match-holder li:hover {
+    cursor: pointer;
+    background-color: #4E4187;
+    transition-duration: 500ms;
+}
+
 .match h5 {
 text-decoration: underline;
 }
@@ -186,6 +201,6 @@ text-decoration: underline;
     }
 
     .top-champs li {
-        padding: 10px;
+        padding: 5px;
     }
 }
