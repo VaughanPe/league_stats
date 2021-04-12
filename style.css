@@ -157,6 +157,10 @@ header form input{
     border-radius: 3px;
 }
 
+.top-champs img {
+    width: 80%;
+}
+
 .top-champs h3 {
     border-bottom: solid 1px black;
     margin-bottom: 7px;
