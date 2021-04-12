@@ -24,25 +24,22 @@ header {
 header h1 {
     padding: 20px;
     color: #C9B9CB;
+    margin: 0 auto;
+    max-width: 740px;
 }
 
 header form {
     width: 100%;
     padding-bottom: 10px;
     color: #002129;
+    margin: 0 auto;
+    max-width: 740px;
 }
 
 header form input{
     width: 60%;
     border-style: none;
     border: solid #000000 1px;
-    padding: 2px;
-    border-radius: 3px;
-    background-color: #C9B9CB;
-}
-
-header form button {
-    border-style: none;
     padding: 2px;
     border-radius: 3px;
     background-color: #C9B9CB;
@@ -152,7 +149,7 @@ header form button {
     max-width: 30%;
     text-align: center;
     background-color: #8777a5;
-    padding: 10px;
+    padding: 3px;
     border-radius: 3px;
 }
 
@@ -182,3 +179,13 @@ header form button {
 text-decoration: underline;
 }
 
+@media only screen and (min-width: 740px) {
+    .account-spread {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .top-champs li {
+        padding: 10px;
+    }
+}

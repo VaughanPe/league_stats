@@ -60,7 +60,7 @@ function displayTopChamps(champArray) {
 		let mp = champ.champ.championPoints
 		championMasteryDisplay.insertAdjacentHTML(`beforeend`, `
 		<li>
-			<h3>Champion: ${name}</h3>
+			<h3>${name}</h3>
 			<img src="${img}" alt="Champion">
 			<h4>Mastery Points: ${mp}</h4>
 		</li>
