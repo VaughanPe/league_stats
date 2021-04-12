@@ -55,11 +55,12 @@ function displayTopChamps(champArray) {
 	console.log(champArray);
 	championMasteryDisplay.innerHTML = ``;
 	champArray.forEach( champ => {
+		let name = champ.champData.id
 		let img = champIcon_url + champ.champData.key + `.png`;
-		let mp = ``;
+		let mp = champ.champ.championPoints
 		championMasteryDisplay.insertAdjacentHTML(`beforeend`, `
 		<li>
-			<h3>Champion</h3>
+			<h3>Champion: ${name}</h3>
 			<img src="${img}" alt="Champion">
 			<h4>Mastery Points: ${mp}</h4>
 		</li>
