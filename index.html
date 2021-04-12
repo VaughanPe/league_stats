@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <header>
+    <div class="headerContent">
+      <h1>Summoner Lookup</h1>
+      <form>
+        <input type="text" placeholder="Type your Summoner ID here">
+      </form>
+    </div>
+    </div>
+  </header>
+  <section class="account-spread">
+    <div class="left">
+      <div class="upper-wrap">
+        <div class="profile">
+          <img src="https://via.placeholder.com/100" class="pfp" alt="Summoner PFP">
+          <h2>Summoner name</h2>
+          <img src="https://via.placeholder.com/80" alt="Rank Image">
+        </div>
+        <div class="stats">
+          <div class="tables">
+            <h1>General Stats</h1>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Matches</td>
+                  <td>Wins</td>
+                  <td>Losses</td>
+                  <td>K/D/A</td>
+                </tr>
+                <tr>
+                  <td>
+                    <!--Data goes here-->
+                  </td>
+                  <td>
+                    <!--Data goes here-->
+                  </td>
+                  <td>
+                    <!--Data goes here-->
+                  </td>
+                  <td>
+                    <!--Data goes here-->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table>
+              <tbody>
+                <tr>
+                  <td>First Blood</td>
+                  <td>Pentas</td>
+                  <td>most CS</td>
+                  <td>most Gold</td>
+                </tr>
+                <tr>
+                  <td>
+                    <!--Data goes here-->
+                  </td>
+                  <td>
+                    <!--Data goes here-->
+                  </td>
+                  <td>
+                    <!--Data goes here-->
+                  </td>
+                  <td>
+                    <!--Data goes here-->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="top-champs">
+        <h1>Top Champions</h1>
+        <ol>
+          <li>
+            <img src="https://via.placeholder.com/75" alt="Champion">
+            <h3>Champion</h3>
+            <h5>Mastery Points</h5>
+          </li>
+          <li>
+            <img src="https://via.placeholder.com/75" alt="Champion">
+            <h3>Champion</h3>
+            <h5>Mastery Points</h5>
+          </li>
+          <li>
+            <img src="https://via.placeholder.com/75" alt="Champion">
+            <h3>Champion</h3>
+            <h5>Mastery Points</h5>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="right">
+      <div class="graph-contain">
+        <h1>"Stat" over time</h1>
+        <canvas id="match"></canvas>
+      </div>
+      <div class="recent-matches">
+        <ul class="match-holder">
+          <li class="match">
+            <img src="https://via.placeholder.com/75" alt="Champion Played">
+            <h5>Mode</h5>
+            <h5>K/D/A</h5>
+            <h5>CS</h5>
+          </li>
+          <li class="match">
+            <img src="https://via.placeholder.com/75" alt="Champion Played">
+            <h5>Mode</h5>
+            <h5>K/D/A</h5>
+            <h5>CS</h5>
+          </li>
+          <li class="match">
+            <img src="https://via.placeholder.com/75" alt="Champion Played">
+            <h5>Mode</h5>
+            <h5>K/D/A</h5>
+            <h5>CS</h5>
+          </li>
+          <li class="match">
+            <img src="https://via.placeholder.com/75" alt="Champion Played">
+            <h5>Mode</h5>
+            <h5>K/D/A</h5>
+            <h5>CS</h5>
+          </li>
+          <li class="match">
+            <img src="https://via.placeholder.com/75" alt="Champion Played">
+            <h5>Mode</h5>
+            <h5>KDA</h5>
+            <h5>CS</h5>
+          </li>
+          <li class="match">
+            <img src="https://via.placeholder.com/75" alt="Champion Played">
+            <h5>Mode</h5>
+            <h5>KDA</h5>
+            <h5>CS</h5>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
