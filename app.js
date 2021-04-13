@@ -1,8 +1,10 @@
 const form = document.querySelector(`form`);
 const searchBar = document.querySelector(`input`);
 const championMasteryDisplay = document.querySelector(`ol`);
-const profileDataDsiplay = document.querySelector(`div.profile`);
-//test 2
+const pfpDisplay = document.querySelector(`img.pfp`);
+const summonerNameDisplay = document.querySelector(`div.profile>h2`);
+const RankDisplay = document.querySelector(`div.profile>img[alt="Rank Image"]`);
+
 const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
 const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
 const championStats_url = `http://ddragon.leagueoflegends.com/cdn/11.7.1/data/en_US/champion.json`;
