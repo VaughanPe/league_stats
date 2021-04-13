@@ -25,8 +25,8 @@ async function getSummoner(name) {
   if (res.status !== 200) {
     displayTopChamps([]);
   } else {
-    accountId = data.accountId
     getRank(data.id, [data.name, data.profileIconId, data.summonerLevel]);
+    accountId = data.accountId;
     getChampionMastery(data.id);
   }
 }
@@ -34,15 +34,19 @@ async function getSummoner(name) {
 async function getRank(id, profileDataArray) {
   const res = await fetch("https://api.ttmhgame20.repl.co/getrank?id=" + id);
   const data = await res.json();
-  profileDataArray.push(data[0].tier.toLowerCase());
-  displayProfileData(profileDataArray)
+  if (res.status !== 200) {
+    console.log(`Something Failed.`);
+  } else {
+    profileDataArray.push(data[0].tier.toLowerCase());
+    displayProfileData(profileDataArray);
+  }
 }
 
 function displayProfileData(profileDataArray) {
-  console.log(profileDataArray);
   pfpDisplay.src = pfp_url + profileDataArray[1] + `.png`;
   summonerNameDisplay.innerText = `${profileDataArray[0]}, Level: ${profileDataArray[2]}`;
   RankDisplay.src = rank_img_url + profileDataArray[3];
+  getRecentMatches(accountId);
 }
 
 async function getChampionMastery(id) {
@@ -82,9 +86,9 @@ async function getChampStats(champArray) {
 function displayTopChamps(champArray) {
   championMasteryDisplay.innerHTML = ``;
   champArray.forEach(champ => {
-    let name = champ.champData.id
+    let name = champ.champData.id;
     let img = champIcon_url + champ.champData.key + `.png`;
-    let mp = champ.champ.championPoints
+    let mp = champ.champ.championPoints;
     championMasteryDisplay.insertAdjacentHTML(`beforeend`, `
 		<li>
 			<img src="${img}" alt="Champion">
@@ -95,77 +99,6 @@ function displayTopChamps(champArray) {
   });
   //getRecentMatches(accountId);
 }
-
-form.addEventListener(`submit`, e => {
-  e.preventDefault();
-  getSummoner(searchBar.value);
-});
-
-recentMatches.addEventListener('click', function (e) {
-  if (e.target.tagName == "LI") {
-    console.log(e.target.id)
-    stats(globalM.matches[e.target.id].gameId, accountId);
-  }
-})
-
-async function getRecentMatches(accId) {
-  let recent = await fetch(`https://api.ttmhgame20.repl.co/getmatches?accId=${accId}`);
-  let response = await recent.json();
-  globalM = response;
-  let champ = await fetch(championStats_url)
-  let res = await champ.json();
-  let champList = [];
-  let maps = await fetch(`http://static.developer.riotgames.com/docs/lol/maps.json`);
-  let mresp = await maps.json();
-  for (let item in res.data) {
-    console.log(item);
-    if (res.data.hasOwnProperty(item)) {
-      champList.push(res.data[item]);
-    }
-  }
-
-  recentMatches.innerHTML = ``;
-  for (let i = 0; i <= 5; i++) {
-    let match = await fetch(`https://api.ttmhgame20.repl.co/getmatch?matchId=${response.matches[i].gameId}`)
-    let matchresp = await match.json();
-    let image = "";
-    let id = "";
-    let Pid;
-    let stats;
-
-
-    champList.forEach(function (element) {
-      if (response.matches[i].champion == element.key) {
-        image = `${champIcon_url}${element.key}.png`;
-        id = element.id;
-      }
-    });
-    matchresp.participantIdentities.forEach(function (e) {
-      if (e.player.accountId == accId) {
-        Pid = e.participantId - 1;
-        stats = matchresp.participants[Pid].stats;
-      }
-    });
-
-    recentMatches.insertAdjacentHTML(`beforeend`, `
-     <li class="match" id=${i}>
-     <img src="${image}" alt="${id}">
-     <h5>${matchresp.gameMode}</h5>
-     <h5>${stats.kills}/${stats.deaths}/${stats.assists}</h5>
-     <h5>${stats.neutralMinionsKilled + stats.totalMinionsKilled}</h5>
-    </li>`)
-  }
-
-}
-
-
-// stats method requires match id and accId
-stats("3853978668", "NleIX8LLH1X3n9UB632uwKmaERhWGR9eaLdA-SE7a1dk9g");
-let deathsArray = [];
-let assistsArray = [];
-
-
-
 
 async function stats(m, acc) {
 
@@ -190,7 +123,7 @@ async function stats(m, acc) {
       Pid = id.participantId;
     }
   })
-  let matcht = await fetch(`https://api.ttmhgame20.repl.co/gettimeline?matchId=${m}`);
+  let matcht = await fetch(`https://api.ttmhgame20.repl.co/gettimeline?matchId=${m}`)
   let tresp = await matcht.json();
   let counter = 0;
   tresp.frames.forEach(element => {
@@ -201,7 +134,6 @@ async function stats(m, acc) {
 
 
       if (e.type == "CHAMPION_KILL" && e.killerId == Pid) {
-        console.log(kills);
         kills++;
       } else if (e.type == "CHAMPION_KILL" && e.victimId == Pid) {
         deaths++;
@@ -210,7 +142,6 @@ async function stats(m, acc) {
           if (e == Pid) {
 
             assists++;
-            console.log(assists);
           }
         })
       }
@@ -224,7 +155,6 @@ async function stats(m, acc) {
 
       if (element.participantFrames[e].participantId == Pid) {
         gold.push(element.participantFrames[e].totalGold);
-        console.log(element.participantFrames[e].jungleMinionsKilled);
         cs.push(element.participantFrames[e].minionsKilled + element.participantFrames[e].jungleMinionsKilled);
         gold2.push(element.participantFrames[e].currentGold);
 
@@ -233,7 +163,6 @@ async function stats(m, acc) {
 
 
   });
-
 
 
   var ctx = document.getElementById('match').getContext('2d');
@@ -298,9 +227,6 @@ async function stats(m, acc) {
       },
     });
   } else {
-
-
-
     myChart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -359,6 +285,66 @@ async function stats(m, acc) {
       },
     });
   }
+}
 
+async function getRecentMatches(accId) {
+  let recent = await fetch(`https://api.ttmhgame20.repl.co/getmatches?accId=${accId}`);
+  let response = await recent.json();
+  globalM = response;
+  let champ = await fetch(championStats_url);
+  let res = await champ.json();
+  let champList = [];
+  let maps = await fetch(`http://static.developer.riotgames.com/docs/lol/maps.json`);
+  let mresp = await maps.json();
+  for (let item in res.data) {
+    if (res.data.hasOwnProperty(item)) {
+      champList.push(res.data[item]);
+    }
+  }
+
+  recentMatches.innerHTML = ``;
+  for (let i = 0; i <= 5; i++) {
+    let match = await fetch(`https://api.ttmhgame20.repl.co/getmatch?matchId=${response.matches[i].gameId}`)
+    let matchresp = await match.json();
+    let image = "";
+    let id = "";
+    let Pid;
+    let stats;
+
+
+    champList.forEach(function (element) {
+      if (response.matches[i].champion == element.key) {
+        image = `${champIcon_url}${element.key}.png`;
+        id = element.id;
+      }
+    });
+    matchresp.participantIdentities.forEach(function (e) {
+      if (e.player.accountId == accId) {
+        Pid = e.participantId - 1;
+        stats = matchresp.participants[Pid].stats;
+      }
+    });
+
+    recentMatches.insertAdjacentHTML(`beforeend`, `
+     <li class="match" id=${i}>
+     <img src="${image}" alt="${id}">
+     <h5>${matchresp.gameMode}</h5>
+     <h5>${stats.kills}/${stats.deaths}/${stats.assists}</h5>
+     <h5>${stats.neutralMinionsKilled + stats.totalMinionsKilled}</h5>
+    </li>`)
+  }
 
 }
+
+searchBar.value = ``;
+
+form.addEventListener(`submit`, e => {
+  e.preventDefault();
+  getSummoner(searchBar.value);
+});
+
+recentMatches.addEventListener('click', function (e) {
+  if (e.target.tagName == "LI") {
+    stats(globalM.matches[e.target.id].gameId, accountId);
+  }
+})
