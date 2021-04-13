@@ -119,47 +119,47 @@ async function stats(m, acc) {
   let resp = await match.json();
 
   resp.participantIdentities.forEach(function (id) {
-      if (id.player.accountId == acc) {
-          Pid = id.participantId;
-      }
+    if (id.player.accountId == acc) {
+      Pid = id.participantId;
+    }
   })
   let matcht = await fetch(`https://api.ttmhgame20.repl.co/gettimeline?matchId=${m}`)
   let tresp = await matcht.json();
   let counter = 0;
   tresp.frames.forEach(element => {
-      time.push(`${counter}`)
-      counter++;
+    time.push(`${counter}`)
+    counter++;
 
-      element.events.forEach(function (e) {
+    element.events.forEach(function (e) {
 
 
-          if (e.type == "CHAMPION_KILL" && e.killerId == Pid) {
-              kills++;
-          } else if (e.type == "CHAMPION_KILL" && e.victimId == Pid) {
-              deaths++;
-          } else if (e.type == "CHAMPION_KILL" && e.assistingParticipantIds.length >= 1) {
-              e.assistingParticipantIds.forEach(function (e) {
-                  if (e == Pid) {
+      if (e.type == "CHAMPION_KILL" && e.killerId == Pid) {
+        kills++;
+      } else if (e.type == "CHAMPION_KILL" && e.victimId == Pid) {
+        deaths++;
+      } else if (e.type == "CHAMPION_KILL" && e.assistingParticipantIds.length >= 1) {
+        e.assistingParticipantIds.forEach(function (e) {
+          if (e == Pid) {
 
-                      assists++;
-                  }
-              })
+            assists++;
           }
+        })
+      }
 
 
-      })
-      killsArray.push(`${kills}`);
-      deathsArray.push(`${deaths}`);
-      assistsArray.push(`${assists}`)
-      players.forEach(function (e) {
+    })
+    killsArray.push(`${kills}`);
+    deathsArray.push(`${deaths}`);
+    assistsArray.push(`${assists}`)
+    players.forEach(function (e) {
 
-          if (element.participantFrames[e].participantId == Pid) {
-              gold.push(element.participantFrames[e].totalGold);
-              cs.push(element.participantFrames[e].minionsKilled + element.participantFrames[e].jungleMinionsKilled);
-              gold2.push(element.participantFrames[e].currentGold);
+      if (element.participantFrames[e].participantId == Pid) {
+        gold.push(element.participantFrames[e].totalGold);
+        cs.push(element.participantFrames[e].minionsKilled + element.participantFrames[e].jungleMinionsKilled);
+        gold2.push(element.participantFrames[e].currentGold);
 
-          }
-      })
+      }
+    })
 
 
   });
@@ -167,123 +167,123 @@ async function stats(m, acc) {
 
   var ctx = document.getElementById('match').getContext('2d');
   if (myChart != "") {
-      myChart.destroy();
+    myChart.destroy();
 
-      myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-              labels: time,
-              datasets: [
-                  {
-                      label: 'Total Gold',
-                      data: gold,
-                      borderColor: "#0d49b8",
-                      backgroundColor: "#2353ad",
-                  },
-                  {
-                      label: 'Current Gold',
-                      data: gold2,
-                      borderColor: "#ffff3b",
-                      backgroundColor: "#ffff3b",
-                  },
-                  {
-                      label: 'CS',
-                      data: cs,
-                      borderColor: "#64d9a2",
-                      backgroundColor: "#89d9b3",
-                  },
-                  {
-                      label: 'Kills',
-                      data: killsArray,
-                      borderColor: "#8b0000",
-                      backgroundColor: "#7a0000",
-                  },
-                  {
-                      label: 'Deaths',
-                      data: deathsArray,
-                      borderColor: "#000000",
-                      backgroundColor: "#000000",
-                  },
-                  {
-                      label: 'Assists',
-                      data: assistsArray,
-                      borderColor: "#787878",
-                      backgroundColor: "#999999",
-                  },
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: time,
+        datasets: [
+          {
+            label: 'Total Gold',
+            data: gold,
+            borderColor: "#0d49b8",
+            backgroundColor: "#2353ad",
+          },
+          {
+            label: 'Current Gold',
+            data: gold2,
+            borderColor: "#ffff3b",
+            backgroundColor: "#ffff3b",
+          },
+          {
+            label: 'CS',
+            data: cs,
+            borderColor: "#64d9a2",
+            backgroundColor: "#89d9b3",
+          },
+          {
+            label: 'Kills',
+            data: killsArray,
+            borderColor: "#8b0000",
+            backgroundColor: "#7a0000",
+          },
+          {
+            label: 'Deaths',
+            data: deathsArray,
+            borderColor: "#000000",
+            backgroundColor: "#000000",
+          },
+          {
+            label: 'Assists',
+            data: assistsArray,
+            borderColor: "#787878",
+            backgroundColor: "#999999",
+          },
 
-              ]
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
           },
-          options: {
-              responsive: true,
-              plugins: {
-                  legend: {
-                      position: 'top',
-                  },
-                  title: {
-                      display: true,
-                      text: 'LOL Match Stats'
-                  }
-              }
-          },
-      });
+          title: {
+            display: true,
+            text: 'LOL Match Stats'
+          }
+        }
+      },
+    });
   } else {
-      myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-              labels: time,
-              datasets: [
-                  {
-                      label: 'Total Gold',
-                      data: gold,
-                      borderColor: "#0d49b8",
-                      backgroundColor: "#2353ad",
-                  },
-                  {
-                      label: 'Current Gold',
-                      data: gold2,
-                      borderColor: "#ffff3b",
-                      backgroundColor: "#ffff3b",
-                  },
-                  {
-                      label: 'CS',
-                      data: cs,
-                      borderColor: "#64d9a2",
-                      backgroundColor: "#89d9b3",
-                  },
-                  {
-                      label: 'Kills',
-                      data: killsArray,
-                      borderColor: "#8b0000",
-                      backgroundColor: "#7a0000",
-                  },
-                  {
-                      label: 'Deaths',
-                      data: deathsArray,
-                      borderColor: "#000000",
-                      backgroundColor: "#000000",
-                  },
-                  {
-                      label: 'Assists',
-                      data: assistsArray,
-                      borderColor: "#787878",
-                      backgroundColor: "#999999",
-                  },
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: time,
+        datasets: [
+          {
+            label: 'Total Gold',
+            data: gold,
+            borderColor: "#0d49b8",
+            backgroundColor: "#2353ad",
+          },
+          {
+            label: 'Current Gold',
+            data: gold2,
+            borderColor: "#ffff3b",
+            backgroundColor: "#ffff3b",
+          },
+          {
+            label: 'CS',
+            data: cs,
+            borderColor: "#64d9a2",
+            backgroundColor: "#89d9b3",
+          },
+          {
+            label: 'Kills',
+            data: killsArray,
+            borderColor: "#8b0000",
+            backgroundColor: "#7a0000",
+          },
+          {
+            label: 'Deaths',
+            data: deathsArray,
+            borderColor: "#000000",
+            backgroundColor: "#000000",
+          },
+          {
+            label: 'Assists',
+            data: assistsArray,
+            borderColor: "#787878",
+            backgroundColor: "#999999",
+          },
 
-              ]
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
           },
-          options: {
-              responsive: true,
-              plugins: {
-                  legend: {
-                      position: 'top',
-                  },
-                  title: {
-                      display: true,
-                      text: 'LOL Match Stats'
-                  }
-              }
-          },
-      });
+          title: {
+            display: true,
+            text: 'LOL Match Stats'
+          }
+        }
+      },
+    });
   }
 }
 
@@ -333,7 +333,7 @@ async function getRecentMatches(accId) {
      <h5>${stats.kills}/${stats.deaths}/${stats.assists}</h5>
      <h5>${stats.neutralMinionsKilled + stats.totalMinionsKilled}</h5>
     </li>`)
-    }
+  }
 
 }
 
