@@ -106,6 +106,7 @@ header form input{
     padding: 10px;
     margin: 15px;
     text-align: center;
+    display: none;
 }
 
  #match {
@@ -199,12 +200,20 @@ text-decoration: underline;
 }
 
 @media only screen and (min-width: 740px) {
+
+    .left {
+        width: 50%;
+    }
+
+    .right {
+        width: 50%;
+    }
     .account-spread {
         display: flex;
         justify-content: space-between;
     }
 
     .top-champs li {
-        padding: 5px;
+        padding: 4px;
     }
 }
