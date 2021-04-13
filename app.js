@@ -423,4 +423,4 @@ recentMatches.addEventListener('click', function (e) {
   if (e.target.tagName == "LI") {
     stats(globalM.matches[e.target.id].gameId, accountId);
   }
-})
+});
