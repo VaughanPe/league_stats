@@ -1,235 +1,234 @@
-*{
-    padding: 0;
-    margin: 0;
+* {
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    background-color: hsl(300, 7%, 3%);
-    color: #002129;
-    font-family: "Kumbh Sans";
+  background-color: hsl(300, 7%, 3%);
+  color: #002129;
+  font-family: "Kumbh Sans";
 }
 
 /*Header section*/
 header {
-    margin: 0 auto;
-    text-align: center;
-    display: block;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
 }
 
 .headerContent {
-    display: block;
-    background-color: #4E4187;
+  display: block;
+  background-color: #4e4187;
 }
 
 header h1 {
-    padding: 20px;
-    color: #C9B9CB;
-    margin: 0 auto;
-    max-width: 740px;
+  padding: 20px;
+  color: #c9b9cb;
+  margin: 0 auto;
+  max-width: 740px;
 }
 
 header form {
-    width: 100%;
-    padding-bottom: 10px;
-    color: #002129;
-    margin: 0 auto;
-    max-width: 1000px;
+  width: 100%;
+  padding-bottom: 10px;
+  color: #002129;
+  margin: 0 auto;
+  max-width: 1000px;
 }
 
-header form input{
-    width: 60%;
-    border-style: none;
-    border: solid #000000 1px;
-    padding: 2px;
-    border-radius: 3px;
-    background-color: #C9B9CB;
+header form input {
+  width: 60%;
+  border-style: none;
+  border: solid #000000 1px;
+  padding: 2px;
+  border-radius: 3px;
+  background-color: #c9b9cb;
 }
 
 .upper-wrap {
-    padding-top: 2px;
+  padding-top: 2px;
 }
 
 /*Stats/Account Section*/
 
 .account-spread {
-    background-color: #4E4187;
-    margin: 10px; 
+  background-color: #4e4187;
+  margin: 10px;
 }
 
 .right {
-    width: 100%;
+  width: 100%;
 }
 
 .profile {
-    text-align: center;
-    padding: 10px;
-    margin: 15px;
-    background-color: #C9B9CB;
+  text-align: center;
+  padding: 10px;
+  margin: 15px;
+  background-color: #c9b9cb;
 }
 
 .profile img {
-    max-width: 34%;
-    margin: 0 auto;
-    display: block;
+  max-width: 32%;
+  margin: 0 auto;
+  display: block;
 }
 
 .profile h2 {
-    font-weight: 400;
-    padding: 10px 0;
+  font-weight: 400;
+  padding: 10px 0;
 }
 
 .pfp {
-    border-radius: 50px;
+  border-radius: 50px;
 }
 
 /*General Stats Section*/
 
 .stats {
-    text-align: center;
-    padding: 10px;
-    margin: 15px;
-    background-color: #C9B9CB;
+  text-align: center;
+  padding: 10px;
+  margin: 15px;
+  background-color: #c9b9cb;
 }
 
 .stats h1 {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .stats table {
-    width: 100%;
+  width: 100%;
 }
 
 /*Graph Section*/
 
 .graph-contain {
-    background-color: #C9B9CB;
-    padding: 10px;
-    margin: 15px;
-    text-align: center;
-    display: none;
+  background-color: #c9b9cb;
+  padding: 10px;
+  margin: 15px;
+  text-align: center;
+  display: none;
 }
 
- #match {
-    width: 90%;
-    height: 200px;
-    border: solid #002129 5px;
-    background-color: #FFFFFF;
-    margin: 0 auto;
-    display: block;
- }
+#match {
+  width: 90%;
+  height: 200px;
+  border: solid #002129 5px;
+  background-color: #ffffff;
+  margin: 0 auto;
+  display: block;
+}
 
- .graph-buttons {
-     margin-top: 5px;
-     width: 100%;
- }
+.graph-buttons {
+  margin-top: 5px;
+  width: 100%;
+}
 
- .graph-buttons button {
-    border: solid 1px #002129;
-    padding: 3  px;
-    border-radius: 3px;
-    background-color: #C9B9CB;
-    font-family: "Kumbh Sans";
- }
+.graph-buttons button {
+  border: solid 1px #002129;
+  padding: 3 px;
+  border-radius: 3px;
+  background-color: #c9b9cb;
+  font-family: "Kumbh Sans";
+}
 
 /*Top Champs Section*/
 
 .top-champs {
-    padding: 10px;
-    margin: 15px;
-    background-color: #C9B9CB;
+  padding: 10px;
+  margin: 15px;
+  background-color: #c9b9cb;
 }
 
 .top-champs h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .top-champs ol {
-    list-style: none;
-    display: flex;
-    margin-top: 15px;
-    justify-content: space-between;
+  list-style: none;
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
 }
 
 .top-champs li {
-    max-width: 30%;
-    text-align: center;
-    background-color: #8777a5;
-    padding: 3px;
-    border-radius: 3px;
+  max-width: 30%;
+  text-align: center;
+  background-color: #8777a5;
+  padding: 3px;
+  border-radius: 3px;
 }
 
 .top-champs img {
-    width: 80%;
+  width: 80%;
 }
 
 .top-champs h3 {
-    border-bottom: solid 1px black;
-    margin-bottom: 7px;
+  border-bottom: solid 1px black;
+  margin-bottom: 7px;
 }
 
 /*Recent Matches Section*/
 
 .recent-matches {
-    padding: 10px;
-    margin: 15px;
-    background-color: #C9B9CB;
+  padding: 10px;
+  margin: 15px;
+  background-color: #c9b9cb;
 }
 
 .recent-matches h1 {
-    text-align: center;
+  text-align: center;
 }
 
-.recent-matches ul{
-    list-style: none;
+.recent-matches ul {
+  list-style: none;
 }
 
 .match-holder li {
-    display: flex;
-    background-color: #8777a5;
-    border-radius: 3px;
-    justify-content: space-around;
-    align-items: center;
-    padding: 5px;
-    margin: 5px 0;
+  display: flex;
+  background-color: #8777a5;
+  border-radius: 3px;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+  margin: 5px 0;
 }
 
 .match-holder li:hover {
-    cursor: pointer;
-    background-color: #4E4187;
-    transition-duration: 500ms;
+  cursor: pointer;
+  background-color: #4e4187;
+  transition-duration: 500ms;
 }
 
 .match h5 {
-text-decoration: underline;
+  text-decoration: underline;
 }
 
 @media only screen and (min-width: 740px) {
+  .left {
+    width: 50%;
+  }
 
-    .left {
-        width: 50%;
-    }
+  .right {
+    width: 50%;
+  }
+  .account-spread {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    .right {
-        width: 50%;
-    }
-    .account-spread {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .top-champs li {
-        padding: 4px;
-    }
+  .top-champs li {
+    padding: 4px;
+  }
 }
 
 @media only screen and (min-width: 1000px) {
-    .graph-contain {
-        display: block;
-        margin: 5px;
-    }
+  .graph-contain {
+    display: block;
+    margin: 5px;
+  }
 
-    .graph-wrap {
-        background-color: #4E4187;
-        margin: 10px; 
-    }
+  .graph-wrap {
+    background-color: #4e4187;
+    margin: 10px;
+  }
 }
