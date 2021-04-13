@@ -14,10 +14,11 @@ const pfp_url = `https://ddragon.leagueoflegends.com/cdn/11.7.1/img/profileicon/
 const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
 const championStats_url = `http://ddragon.leagueoflegends.com/cdn/11.7.1/data/en_US/champion.json`;
 const champIcon_url = `http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/`;
-let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let globalM;
 let accountId;
 let myChart = "";
+let genStats = [];
 
 async function getSummoner(name) {
   const res = await fetch(summoner_url + name);
@@ -43,7 +44,6 @@ async function getRank(id, profileDataArray) {
 }
 
 function displayProfileData(profileDataArray) {
-  console.log(profileDataArray);
   pfpDisplay.src = pfp_url + profileDataArray[1] + `.png`;
   summonerNameDisplay.innerText = `${profileDataArray[0]}, Level: ${profileDataArray[2]}`;
   RankDisplay.src = rank_img_url + profileDataArray[3];
@@ -127,7 +127,7 @@ async function stats(m, acc) {
   let tresp = await matcht.json();
   let counter = 0;
   tresp.frames.forEach(element => {
-    time.push(`${counter}`)
+    time.push(`${counter}`);
     counter++;
 
     element.events.forEach(function (e) {
@@ -306,6 +306,7 @@ async function getRecentMatches(accId) {
   for (let i = 0; i <= 5; i++) {
     let match = await fetch(`https://api.ttmhgame20.repl.co/getmatch?matchId=${response.matches[i].gameId}`)
     let matchresp = await match.json();
+    //
     let image = "";
     let id = "";
     let Pid;
