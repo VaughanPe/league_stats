@@ -60,7 +60,7 @@ async function getRank(id, profileDataArray) {
   if (res.status !== 200) {
     console.error(`The Fetch Failed.`);
   } else {
-		if (data.status_code !== 200) {
+		if (data.status_code === 504) {
 			console.error(`Error: User Not Found.`);
 		} else {
 			profileDataArray.push(data[0].tier.toLowerCase());
