@@ -33,7 +33,7 @@ header form {
     padding-bottom: 10px;
     color: #002129;
     margin: 0 auto;
-    max-width: 740px;
+    max-width: 1000px;
 }
 
 header form input{
@@ -68,7 +68,7 @@ header form input{
 }
 
 .profile img {
-    max-width: 60%;
+    max-width: 34%;
     margin: 0 auto;
     display: block;
 }
@@ -219,5 +219,17 @@ text-decoration: underline;
 
     .top-champs li {
         padding: 4px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .graph-contain {
+        display: block;
+        margin: 5px;
+    }
+
+    .graph-wrap {
+        background-color: #4E4187;
+        margin: 10px; 
     }
 }

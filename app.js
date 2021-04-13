@@ -43,7 +43,7 @@ async function getRank(id, profileDataArray) {
 function displayProfileData(profileDataArray) {
   console.log(profileDataArray);
   pfpDisplay.src = pfp_url + profileDataArray[1] + `.png`;
-  summonerNameDisplay.innerText = `Summoner Name: ${profileDataArray[0]}, Level: ${profileDataArray[2]}, Rank: ${profileDataArray[3]}`;
+  summonerNameDisplay.innerText = `${profileDataArray[0]}, Level: ${profileDataArray[2]}`;
   RankDisplay.src = rank_img_url + profileDataArray[3];
 }
 
