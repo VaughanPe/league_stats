@@ -359,7 +359,27 @@ async function getRecentMatches(accId) {
 }
 
 function sortGenStats(genStats) {
-  displayGenStats(genStats);
+  let newGenStats = {
+    kills: 0, 
+    deaths: 0, 
+    assists:0,
+    cs:0,
+    wins:0,
+    fbs:[],
+    pk:[],
+    tg:0,
+    vs:[],
+  };
+
+  newGenStats.kills = genStats.kills.reduce( (total, num) => {return total + num});
+  newGenStats.deaths = genStats.deaths.reduce( (total, num) => {return total + num});
+  newGenStats.assists = genStats.assists.reduce( (total, num) => {return total + num});
+  newGenStats.wins = genStats.wins.reduce( (total, value) => {
+    return total + num;
+  });
+  newGenStats.cs = genStats.cs.reduce((a, b) => {return Math.max(a, b)});
+  newGenStats.tg = genStats.tg.reduce((a, b) => {return Math.max(a, b)});
+  displayGenStats(newGenStats);
 }
 
 function displayGenStats(genStats) {
