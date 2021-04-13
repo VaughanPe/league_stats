@@ -33,7 +33,7 @@ async function getSummoner(name) {
 }
 
 async function getRank(id, profileDataArray) {
-  const res = await fetch("https://api.ttmhgame20.repl.co/getrank?id=" + id);
+  const res = await fetch(rank_url + id);
   const data = await res.json();
   if (res.status !== 200) {
     console.log(`Something Failed.`);
