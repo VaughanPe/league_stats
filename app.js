@@ -2,9 +2,16 @@ const form = document.querySelector(`form`);
 const searchBar = document.querySelector(`input`);
 const championMasteryDisplay = document.querySelector(`ol`);
 const recentMatches = document.querySelector(".match-holder");
-const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
-const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
 const graph = document.querySelector(".match");
+const pfpDisplay = document.querySelector(`img.pfp`);
+const summonerNameDisplay = document.querySelector(`div.profile>h2`);
+const RankDisplay = document.querySelector(`div.profile>img[alt="Rank Image"]`);
+
+const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
+const rank_url = `https://api.ttmhgame20.repl.co/getrank?id=`;
+const rank_img_url = `https://api.ttmhgame20.repl.co/getleague?league=`;
+const pfp_url = `https://ddragon.leagueoflegends.com/cdn/11.7.1/img/profileicon/`;
+const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
 const championStats_url = `http://ddragon.leagueoflegends.com/cdn/11.7.1/data/en_US/champion.json`;
 const champIcon_url = `http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/`;
 let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -13,123 +20,135 @@ let accountId;
 let myChart = "";
 
 async function getSummoner(name) {
-    const res = await fetch(summoner_url + name);
-    const data = await res.json();
-    if (res.status !== 200) {
-        displayTopChamps([]);
-    } else {
-        getChampionMastery(data.id);
-        accountId = data.accountId
-        getRecentMatches(data.accountId);
-    }
+  const res = await fetch(summoner_url + name);
+  const data = await res.json();
+  if (res.status !== 200) {
+    displayTopChamps([]);
+  } else {
+    accountId = data.accountId
+    getRecentMatches(data.accountId);
+    getRank(data.id, [data.name, data.profileIconId, data.summonerLevel]);
+    getChampionMastery(data.id);
+  }
+}
+
+async function getRank(id, profileDataArray) {
+  const res = await fetch(rank_url + id);
+  const data = await res.json();
+  profileDataArray.push(data[0].tier.toLowerCase());
+  displayProfileData(profileDataArray)
+}
+
+function displayProfileData(profileDataArray) {
+  console.log(profileDataArray);
+  pfpDisplay.src = pfp_url + profileDataArray[1] + `.png`;
+  summonerNameDisplay.innerText = `${profileDataArray[0]}, Level: ${profileDataArray[2]}`;
+  RankDisplay.src = rank_img_url + profileDataArray[3];
 }
 
 async function getChampionMastery(id) {
-    const res = await fetch(mastery_url + id);
-    const data = await res.json();
-    getTopChamps(data);
+  const res = await fetch(mastery_url + id);
+  const data = await res.json();
+  getTopChamps(data);
 }
 
 function getTopChamps(champArray) {
-    let newChampArray = [];
-    let counter = 1;
-    for (let i = 0; i < 3; i++) {
-        if (champArray.length > counter) {
-            newChampArray.push(champArray[i]);
-            counter++;
-        }
+  let newChampArray = [];
+  let counter = 1;
+  for (let i = 0; i < 3; i++) {
+    if (champArray.length > counter) {
+      newChampArray.push(champArray[i]);
+      counter++;
     }
+  }
 
-    getChampStats(newChampArray);
+  getChampStats(newChampArray);
 }
 
 async function getChampStats(champArray) {
-    const res = await fetch(championStats_url);
-    const data = await res.json();
-    let newChampArray = [];
-    champArray.forEach(champ => {
-        for (const champData in data.data) {
-            if (champ.championId === parseInt(data.data[champData].key)) {
-                newChampArray.push({ champ, champData: data.data[champData] })
-            }
-        }
-    });
+  const res = await fetch(championStats_url);
+  const data = await res.json();
+  let newChampArray = [];
+  champArray.forEach(champ => {
+    for (const champData in data.data) {
+      if (champ.championId === parseInt(data.data[champData].key)) {
+        newChampArray.push({ champ, champData: data.data[champData] })
+      }
+    }
+  });
 
-    displayTopChamps(newChampArray);
+  displayTopChamps(newChampArray);
 }
 
 function displayTopChamps(champArray) {
-    console.log(champArray);
-    championMasteryDisplay.innerHTML = ``;
-    champArray.forEach(champ => {
-        let name = champ.champData.id
-        let img = champIcon_url + champ.champData.key + `.png`;
-        let mp = champ.champ.championPoints
-        championMasteryDisplay.insertAdjacentHTML(`beforeend`, `
+  championMasteryDisplay.innerHTML = ``;
+  champArray.forEach(champ => {
+    let name = champ.champData.id
+    let img = champIcon_url + champ.champData.key + `.png`;
+    let mp = champ.champ.championPoints
+    championMasteryDisplay.insertAdjacentHTML(`beforeend`, `
 		<li>
 			<img src="${img}" alt="Champion">
 			<h3>${name}</h3>
 			<h5>Mastery Points: ${mp}</h4>
 		</li>
 		`);
-    });
+  });
 }
 
 form.addEventListener(`submit`, e => {
-    e.preventDefault();
-    getSummoner(searchBar.value);
+  e.preventDefault();
+  getSummoner(searchBar.value);
 });
 
 recentMatches.addEventListener('click', function (e) {
-    if (e.target.tagName == "LI") {
-        console.log(e.target.id)
-        stats(globalM.matches[e.target.id].gameId, accountId);
-    }
+  if (e.target.tagName == "LI") {
+    console.log(e.target.id)
+    stats(globalM.matches[e.target.id].gameId, accountId);
+  }
 })
 
 async function getRecentMatches(accId) {
-    let recent = await fetch(`https://api.ttmhgame20.repl.co/getmatches?accId=${accId}`);
-    let response = await recent.json();
-    globalM = response;
-    let champ = await fetch(championStats_url)
-    let res = await champ.json();
-    let champList = [];
-    let maps = await fetch(`http://static.developer.riotgames.com/docs/lol/maps.json`);
-    let mresp = await maps.json();
-    for (let item in res.data) {
-        console.log(item);
-        if (res.data.hasOwnProperty(item)) {
-            champList.push(res.data[item]);
-        }
+  let recent = await fetch(`https://api.ttmhgame20.repl.co/getmatches?accId=${accId}`);
+  let response = await recent.json();
+  globalM = response;
+  let champ = await fetch(championStats_url)
+  let res = await champ.json();
+  let champList = [];
+  let maps = await fetch(`http://static.developer.riotgames.com/docs/lol/maps.json`);
+  let mresp = await maps.json();
+  for (let item in res.data) {
+    console.log(item);
+    if (res.data.hasOwnProperty(item)) {
+      champList.push(res.data[item]);
     }
+  }
+
+  recentMatches.innerHTML = ``;
+  for (let i = 0; i <= 5; i++) {
+    let match = await fetch(`https://api.ttmhgame20.repl.co/getmatch?matchId=${response.matches[i].gameId}`)
+    let matchresp = await match.json();
+    let image = "";
+    let id = "";
+    let Pid;
+    let stats;
 
 
+    champList.forEach(function (element) {
+      if (response.matches[i].champion == element.key) {
+        image = `${champIcon_url}${element.key}.png`;
+        id = element.id;
+      }
+    });
+    matchresp.participantIdentities.forEach(function (e) {
+      if (e.player.accountId == accId) {
+        Pid = e.participantId - 1;
+        stats = matchresp.participants[Pid].stats;
+        console.log(matchresp.participants[Pid])
+      }
+    });
 
-    recentMatches.innerHTML = ``;
-    for (let i = 0; i <= 5; i++) {
-        let match = await fetch(`https://api.ttmhgame20.repl.co/getmatch?matchId=${response.matches[i].gameId}`)
-        let matchresp = await match.json();
-        let image = "";
-        let id = "";
-        let Pid;
-        let stats;
-
-
-        champList.forEach(function (element) {
-            if (response.matches[i].champion == element.key) {
-                image = `${champIcon_url}${element.key}.png`
-                id = element.id;
-            }
-        });
-        matchresp.participantIdentities.forEach(function (e) {
-            if (e.player.accountId == accId) {
-                Pid = e.participantId - 1;
-                stats = matchresp.participants[Pid].stats;
-                console.log(matchresp.participants[Pid])
-            }
-        })
-
-        recentMatches.insertAdjacentHTML(`beforeend`, `
+    recentMatches.insertAdjacentHTML(`beforeend`, `
      <li class="match" id=${i}>
      <img src="${image}" alt="${id}">
      <h5>${matchresp.gameMode}</h5>
@@ -142,6 +161,9 @@ async function getRecentMatches(accId) {
 
 
 // stats method requires match id and accId
+stats("3853978668", "NleIX8LLH1X3n9UB632uwKmaERhWGR9eaLdA-SE7a1dk9g");
+let deathsArray = [];
+let assistsArray = [];
 
 
 
