@@ -6,6 +6,14 @@ const graph = document.querySelector(".match");
 const pfpDisplay = document.querySelector(`img.pfp`);
 const summonerNameDisplay = document.querySelector(`div.profile>h2`);
 const RankDisplay = document.querySelector(`div.profile>img[alt="Rank Image"]`);
+const vsDisplay = document.querySelector(`td.gd-vs`);
+const winDisplay = document.querySelector(`td.gd-wins`);
+const lossDisplay = document.querySelector(`td.gd-losses`);
+const kdaDisplay = document.querySelector(`td.gd-kda`);
+const fbDisplay = document.querySelector(`td.gd-fb`);
+const pkDisplay = document.querySelector(`td.gd-pk`);
+const csDisplay = document.querySelector(`td.gd-cs`);
+const goldDisplay = document.querySelector(`td.gd-gold`);
 
 const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
 const rank_url = `https://api.ttmhgame20.repl.co/getrank?id=`;
@@ -359,19 +367,16 @@ async function getRecentMatches(accId) {
 }
 
 function sortGenStats(genStats) {
-  let winC = 0;
-  let fbC = 0;
-  let pkC = 0;
   let newGenStats = {
     kills: 0, 
     deaths: 0, 
     assists:0,
     cs:0,
     wins:0,
-    fbs:[],
-    pk:[],
+    fb:0,
+    pk:0,
     tg:0,
-    vs:[],
+    vs:0,
   };
 
   newGenStats.kills = genStats.kills.reduce( (total, num) => {return total + num});
@@ -382,7 +387,7 @@ function sortGenStats(genStats) {
     let newValue = value ? 1 : 0;
     return total + newValue;
   });
-  newGenStats.fbs = genStats.fbs.reduce( (total, value) => {
+  newGenStats.fb = genStats.fbs.reduce( (total, value) => {
     let newValue = value ? 1 : 0;
     return total + newValue;
   });
@@ -396,6 +401,14 @@ function sortGenStats(genStats) {
 }
 
 function displayGenStats(genStats) {
+  vsDisplay.innerText = genStats.vs;
+  winDisplay.innerText = genStats.wins;
+  lossDisplay.innerText = (6 - genStats.wins);
+  kdaDisplay.innerText = `${genStats.kills}/${genStats.deaths}/${genStats.assists}`;
+  fbDisplay.innerText = genStats.fb;
+  pkDisplay.innerText = genStats.pk;
+  csDisplay.innerText = genStats.cs;
+  goldDisplay.innerText = genStats.tg;
   console.log(genStats)
 }
 
