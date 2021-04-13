@@ -175,6 +175,10 @@ header form input{
     background-color: #C9B9CB;
 }
 
+.recent-matches h1 {
+    text-align: center;
+}
+
 .recent-matches ul{
     list-style: none;
 }
