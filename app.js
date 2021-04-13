@@ -8,6 +8,9 @@ const summonerNameDisplay = document.querySelector(`div.profile>h2`);
 const RankDisplay = document.querySelector(`div.profile>img[alt="Rank Image"]`);
 
 const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
+const match_url = `https://api.ttmhgame20.repl.co/getmatch?matchId=`;
+const matches_url = `https://api.ttmhgame20.repl.co/getmatches?accId=`
+const timeline_url = `https://api.ttmhgame20.repl.co/gettimeline?matchId=`
 const rank_url = `https://api.ttmhgame20.repl.co/getrank?id=`;
 const rank_img_url = `https://api.ttmhgame20.repl.co/getleague?league=`;
 const pfp_url = `https://ddragon.leagueoflegends.com/cdn/11.7.1/img/profileicon/`;
@@ -18,6 +21,7 @@ let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 let globalM;
 let accountId;
 let myChart = "";
+
 
 async function getSummoner(name) {
   const res = await fetch(summoner_url + name);
@@ -32,7 +36,7 @@ async function getSummoner(name) {
 }
 
 async function getRank(id, profileDataArray) {
-  const res = await fetch("https://api.ttmhgame20.repl.co/getrank?id=" + id);
+  const res = await fetch(rank_url + id);
   const data = await res.json();
   if (res.status !== 200) {
     console.log(`Something Failed.`);
@@ -115,7 +119,7 @@ async function stats(m, acc) {
   let Pid;
 
 
-  let match = await fetch(`https://api.ttmhgame20.repl.co/getmatch?matchId=${m}`);
+  let match = await fetch(match_url + m);
   let resp = await match.json();
 
   resp.participantIdentities.forEach(function (id) {
@@ -123,7 +127,7 @@ async function stats(m, acc) {
       Pid = id.participantId;
     }
   })
-  let matcht = await fetch(`https://api.ttmhgame20.repl.co/gettimeline?matchId=${m}`)
+  let matcht = await fetch(timeline_url + m)
   let tresp = await matcht.json();
   let counter = 0;
   tresp.frames.forEach(element => {
@@ -288,14 +292,12 @@ async function stats(m, acc) {
 }
 
 async function getRecentMatches(accId) {
-  let recent = await fetch(`https://api.ttmhgame20.repl.co/getmatches?accId=${accId}`);
+  let recent = await fetch(matches_url+accId);
   let response = await recent.json();
   globalM = response;
   let champ = await fetch(championStats_url);
   let res = await champ.json();
   let champList = [];
-  let maps = await fetch(`http://static.developer.riotgames.com/docs/lol/maps.json`);
-  let mresp = await maps.json();
   for (let item in res.data) {
     if (res.data.hasOwnProperty(item)) {
       champList.push(res.data[item]);
@@ -304,7 +306,7 @@ async function getRecentMatches(accId) {
 
   recentMatches.innerHTML = ``;
   for (let i = 0; i <= 5; i++) {
-    let match = await fetch(`https://api.ttmhgame20.repl.co/getmatch?matchId=${response.matches[i].gameId}`)
+    let match = await fetch(match_url + response.matches[i].gameId)
     let matchresp = await match.json();
     let image = "";
     let id = "";
