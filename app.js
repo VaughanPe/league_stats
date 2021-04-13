@@ -26,7 +26,7 @@ async function getSummoner(name) {
   if (res.status !== 200) {
     displayTopChamps([]);
   } else {
-    accountId = data.accountId
+    accountId = data.accountId;
     getRecentMatches(data.accountId);
     getRank(data.id, [data.name, data.profileIconId, data.summonerLevel]);
     getChampionMastery(data.id);
@@ -37,7 +37,8 @@ async function getRank(id, profileDataArray) {
   const res = await fetch(rank_url + id);
   const data = await res.json();
   profileDataArray.push(data[0].tier.toLowerCase());
-  displayProfileData(profileDataArray)
+  console.log(profileDataArray);
+  displayProfileData(profileDataArray);
 }
 
 function displayProfileData(profileDataArray) {
@@ -221,9 +222,9 @@ async function stats(m, acc) {
   });
 });
 
-var ctx = document.getElementById('match').getContext('2d');
+let ctx = document.getElementById('match').getContext('2d');
 
-var myChart = new Chart(ctx, {
+let myChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: time,
