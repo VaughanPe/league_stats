@@ -8,6 +8,7 @@ const RankDisplay = document.querySelector(`div.profile>img[alt="Rank Image"]`);
 const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
 const rank_url = `https://api.ttmhgame20.repl.co/getrank?id=`;
 const rank_img_url = `https://api.ttmhgame20.repl.co/getleague?league=`;
+const pfp_url = `https://ddragon.leagueoflegends.com/cdn/11.7.1/img/profileicon/`;
 const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
 const championStats_url = `http://ddragon.leagueoflegends.com/cdn/11.7.1/data/en_US/champion.json`;
 const champIcon_url = `http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/`;
@@ -15,18 +16,26 @@ const champIcon_url = `http://raw.communitydragon.org/latest/plugins/rcp-be-lol-
 async function getSummoner(name) {
   const res = await fetch(summoner_url + name);
   const data = await res.json();
-  console.log(data)
   if (res.status !== 200) {
     displayTopChamps([]);
   } else {
+    getRank(data.id, [data.name, data.profileIconId, data.summonerLevel]);
     getChampionMastery(data.id);
   }
 }
 
-async function getRank(id) {
-  const res = await fetch(mastery_url + id);
+async function getRank(id, profileDataArray) {
+  const res = await fetch(rank_url + id);
   const data = await res.json();
-  console.log(data);
+  profileDataArray.push(data[0].tier.toLowerCase());
+  displayProfileData(profileDataArray)
+}
+
+function displayProfileData(profileDataArray) {
+  console.log(profileDataArray);
+  pfpDisplay.src = pfp_url + profileDataArray[1] + `.png`;
+  summonerNameDisplay.innerText = `Summoner Name: ${profileDataArray[0]}, Level: ${profileDataArray[2]}, Rank: ${profileDataArray[3]}`;
+  RankDisplay.src = rank_img_url + profileDataArray[3];
 }
 
 async function getChampionMastery(id) {
