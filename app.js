@@ -359,6 +359,9 @@ async function getRecentMatches(accId) {
 }
 
 function sortGenStats(genStats) {
+  let winC = 0;
+  let fbC = 0;
+  let pkC = 0;
   let newGenStats = {
     kills: 0, 
     deaths: 0, 
@@ -374,8 +377,18 @@ function sortGenStats(genStats) {
   newGenStats.kills = genStats.kills.reduce( (total, num) => {return total + num});
   newGenStats.deaths = genStats.deaths.reduce( (total, num) => {return total + num});
   newGenStats.assists = genStats.assists.reduce( (total, num) => {return total + num});
+  newGenStats.vs = genStats.vs.reduce( (total, num) => {return total + num});
   newGenStats.wins = genStats.wins.reduce( (total, value) => {
-    return total + num;
+    let newValue = value ? 1 : 0;
+    return total + newValue;
+  });
+  newGenStats.fbs = genStats.fbs.reduce( (total, value) => {
+    let newValue = value ? 1 : 0;
+    return total + newValue;
+  });
+  newGenStats.pk = genStats.pk.reduce( (total, value) => {
+    let newValue = value ? 1 : 0;
+    return total + newValue;
   });
   newGenStats.cs = genStats.cs.reduce((a, b) => {return Math.max(a, b)});
   newGenStats.tg = genStats.tg.reduce((a, b) => {return Math.max(a, b)});
