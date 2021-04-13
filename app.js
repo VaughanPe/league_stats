@@ -58,10 +58,14 @@ async function getRank(id, profileDataArray) {
   const res = await fetch(rank_url + id);
   const data = await res.json();
   if (res.status !== 200) {
-    console.log(`Something Failed.`);
+    console.error(`The Fetch Failed.`);
   } else {
-    profileDataArray.push(data[0].tier.toLowerCase());
-    displayProfileData(profileDataArray);
+		if (data.status_code !== 200) {
+			console.error(`Error: User Not Found.`);
+		} else {
+			profileDataArray.push(data[0].tier.toLowerCase());
+    	displayProfileData(profileDataArray);
+		}
   }
 }
 
