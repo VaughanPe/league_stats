@@ -33,10 +33,10 @@ async function getSummoner(name) {
 }
 
 async function getRank(id, profileDataArray) {
-  const res = await fetch(rank_url + id);
+  const res = await fetch("https://api.ttmhgame20.repl.co/getrank?id=" + id);
   const data = await res.json();
   if (res.status !== 200) {
-    console.log(`Something Failed.`)
+    console.log(`Something Failed.`);
   } else {
     profileDataArray.push(data[0].tier.toLowerCase());
     displayProfileData(profileDataArray);
@@ -87,9 +87,9 @@ async function getChampStats(champArray) {
 function displayTopChamps(champArray) {
   championMasteryDisplay.innerHTML = ``;
   champArray.forEach(champ => {
-    let name = champ.champData.id
+    let name = champ.champData.id;
     let img = champIcon_url + champ.champData.key + `.png`;
-    let mp = champ.champ.championPoints
+    let mp = champ.champ.championPoints;
     championMasteryDisplay.insertAdjacentHTML(`beforeend`, `
 		<li>
 			<img src="${img}" alt="Champion">
@@ -98,6 +98,7 @@ function displayTopChamps(champArray) {
 		</li>
 		`);
   });
+  //getRecentMatches(accountId);
 }
 
 async function stats(m, acc) {
@@ -150,7 +151,7 @@ async function stats(m, acc) {
     })
     killsArray.push(`${kills}`);
     deathsArray.push(`${deaths}`);
-    assistsArray.push(`${assists}`)
+    assistsArray.push(`${assists}`);
     players.forEach(function (e) {
 
       if (element.participantFrames[e].participantId == Pid) {
@@ -291,7 +292,7 @@ async function getRecentMatches(accId) {
   let recent = await fetch(`https://api.ttmhgame20.repl.co/getmatches?accId=${accId}`);
   let response = await recent.json();
   globalM = response;
-  let champ = await fetch(championStats_url)
+  let champ = await fetch(championStats_url);
   let res = await champ.json();
   let champList = [];
   let maps = await fetch(`http://static.developer.riotgames.com/docs/lol/maps.json`);
@@ -323,7 +324,6 @@ async function getRecentMatches(accId) {
       if (e.player.accountId == accId) {
         Pid = e.participantId - 1;
         stats = matchresp.participants[Pid].stats;
-        console.log(matchresp.participants[Pid])
       }
     });
 
@@ -347,7 +347,6 @@ form.addEventListener(`submit`, e => {
 
 recentMatches.addEventListener('click', function (e) {
   if (e.target.tagName == "LI") {
-    console.log(e.target.id)
     stats(globalM.matches[e.target.id].gameId, accountId);
   }
 })
