@@ -27,7 +27,6 @@ async function getSummoner(name) {
   } else {
     getRank(data.id, [data.name, data.profileIconId, data.summonerLevel]);
     accountId = data.accountId;
-    getRecentMatches(accountId);
     getChampionMastery(data.id);
   }
 }
@@ -48,6 +47,7 @@ function displayProfileData(profileDataArray) {
   pfpDisplay.src = pfp_url + profileDataArray[1] + `.png`;
   summonerNameDisplay.innerText = `${profileDataArray[0]}, Level: ${profileDataArray[2]}`;
   RankDisplay.src = rank_img_url + profileDataArray[3];
+  getRecentMatches(accountId);
 }
 
 async function getChampionMastery(id) {
