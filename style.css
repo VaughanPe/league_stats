@@ -33,7 +33,7 @@ header form {
     padding-bottom: 10px;
     color: #002129;
     margin: 0 auto;
-    max-width: 740px;
+    max-width: 1000px;
 }
 
 header form input{
@@ -68,7 +68,7 @@ header form input{
 }
 
 .profile img {
-    max-width: 60%;
+    max-width: 34%;
     margin: 0 auto;
     display: block;
 }
@@ -106,6 +106,7 @@ header form input{
     padding: 10px;
     margin: 15px;
     text-align: center;
+    display: none;
 }
 
  #match {
@@ -174,6 +175,10 @@ header form input{
     background-color: #C9B9CB;
 }
 
+.recent-matches h1 {
+    text-align: center;
+}
+
 .recent-matches ul{
     list-style: none;
 }
@@ -199,12 +204,32 @@ text-decoration: underline;
 }
 
 @media only screen and (min-width: 740px) {
+
+    .left {
+        width: 50%;
+    }
+
+    .right {
+        width: 50%;
+    }
     .account-spread {
         display: flex;
         justify-content: space-between;
     }
 
     .top-champs li {
-        padding: 5px;
+        padding: 4px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .graph-contain {
+        display: block;
+        margin: 5px;
+    }
+
+    .graph-wrap {
+        background-color: #4E4187;
+        margin: 10px; 
     }
 }
