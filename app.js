@@ -6,6 +6,14 @@ const graph = document.querySelector(".match");
 const pfpDisplay = document.querySelector(`img.pfp`);
 const summonerNameDisplay = document.querySelector(`div.profile>h2`);
 const RankDisplay = document.querySelector(`div.profile>img[alt="Rank Image"]`);
+const vsDisplay = document.querySelector(`td.gd-vs`);
+const winDisplay = document.querySelector(`td.gd-wins`);
+const lossDisplay = document.querySelector(`td.gd-losses`);
+const kdaDisplay = document.querySelector(`td.gd-kda`);
+const fbDisplay = document.querySelector(`td.gd-fb`);
+const pkDisplay = document.querySelector(`td.gd-pk`);
+const csDisplay = document.querySelector(`td.gd-cs`);
+const goldDisplay = document.querySelector(`td.gd-gold`);
 
 const summoner_url = `https://api.ttmhgame20.repl.co/getsummoner?name=`;
 const match_url = `https://api.ttmhgame20.repl.co/getmatch?matchId=`;
@@ -17,10 +25,21 @@ const pfp_url = `https://ddragon.leagueoflegends.com/cdn/11.7.1/img/profileicon/
 const mastery_url = `https://api.ttmhgame20.repl.co/getmastery?id=`;
 const championStats_url = `http://ddragon.leagueoflegends.com/cdn/11.7.1/data/en_US/champion.json`;
 const champIcon_url = `http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/`;
-let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let globalM;
 let accountId;
 let myChart = "";
+let genStats = {
+  kills:[], 
+  deaths:[], 
+  assists:[],
+  cs:[],
+  wins:[],
+  fbs:[],
+  pk:[],
+  tg:[],
+  vs:[],
+};
 
 
 async function getSummoner(name) {
@@ -313,19 +332,29 @@ async function getRecentMatches(accId) {
     let Pid;
     let stats;
 
-
     champList.forEach(function (element) {
       if (response.matches[i].champion == element.key) {
         image = `${champIcon_url}${element.key}.png`;
         id = element.id;
       }
     });
+
     matchresp.participantIdentities.forEach(function (e) {
       if (e.player.accountId == accId) {
         Pid = e.participantId - 1;
         stats = matchresp.participants[Pid].stats;
       }
     });
+
+    genStats.kills.push(stats.kills);
+    genStats.deaths.push(stats.deaths);
+    genStats.assists.push(stats.assists);
+    genStats.cs.push(stats.neutralMinionsKilled + stats.totalMinionsKilled);
+    genStats.wins.push(stats.win);
+    genStats.fbs.push(stats.firstBloodKill);
+    genStats.pk.push(stats.pentaKills);
+    genStats.tg.push(stats.goldEarned);
+    genStats.vs.push(stats.visionScore);
 
     recentMatches.insertAdjacentHTML(`beforeend`, `
      <li class="match" id=${i}>
@@ -336,6 +365,53 @@ async function getRecentMatches(accId) {
     </li>`)
   }
 
+  sortGenStats(genStats);
+}
+
+function sortGenStats(genStats) {
+  let newGenStats = {
+    kills: 0, 
+    deaths: 0, 
+    assists:0,
+    cs:0,
+    wins:0,
+    fb:0,
+    pk:0,
+    tg:0,
+    vs:0,
+  };
+
+  newGenStats.kills = genStats.kills.reduce( (total, num) => {return total + num});
+  newGenStats.deaths = genStats.deaths.reduce( (total, num) => {return total + num});
+  newGenStats.assists = genStats.assists.reduce( (total, num) => {return total + num});
+  newGenStats.vs = genStats.vs.reduce( (total, num) => {return total + num});
+  newGenStats.wins = genStats.wins.reduce( (total, value) => {
+    let newValue = value ? 1 : 0;
+    return total + newValue;
+  });
+  newGenStats.fb = genStats.fbs.reduce( (total, value) => {
+    let newValue = value ? 1 : 0;
+    return total + newValue;
+  });
+  newGenStats.pk = genStats.pk.reduce( (total, value) => {
+    let newValue = value ? 1 : 0;
+    return total + newValue;
+  });
+  newGenStats.cs = genStats.cs.reduce((a, b) => {return Math.max(a, b)});
+  newGenStats.tg = genStats.tg.reduce((a, b) => {return Math.max(a, b)});
+  displayGenStats(newGenStats);
+}
+
+function displayGenStats(genStats) {
+  vsDisplay.innerText = genStats.vs;
+  winDisplay.innerText = genStats.wins;
+  lossDisplay.innerText = (6 - genStats.wins);
+  kdaDisplay.innerText = `${genStats.kills}/${genStats.deaths}/${genStats.assists}`;
+  fbDisplay.innerText = genStats.fb;
+  pkDisplay.innerText = genStats.pk;
+  csDisplay.innerText = genStats.cs;
+  goldDisplay.innerText = genStats.tg;
+  console.log(genStats)
 }
 
 searchBar.value = ``;
@@ -349,4 +425,4 @@ recentMatches.addEventListener('click', function (e) {
   if (e.target.tagName == "LI") {
     stats(globalM.matches[e.target.id].gameId, accountId);
   }
-})
+});
