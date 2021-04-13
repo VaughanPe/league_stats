@@ -18,7 +18,17 @@ let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let globalM;
 let accountId;
 let myChart = "";
-let genStats = [];
+let genStats = {
+  kills:[], 
+  deaths:[], 
+  assists:[],
+  cs:[],
+  wins:[],
+  fbs:[],
+  pk:[],
+  tg:[],
+  vs:[],
+};
 
 async function getSummoner(name) {
   const res = await fetch(summoner_url + name);
@@ -307,12 +317,10 @@ async function getRecentMatches(accId) {
   for (let i = 0; i <= 5; i++) {
     let match = await fetch(`https://api.ttmhgame20.repl.co/getmatch?matchId=${response.matches[i].gameId}`)
     let matchresp = await match.json();
-    //
     let image = "";
     let id = "";
     let Pid;
     let stats;
-
 
     champList.forEach(function (element) {
       if (response.matches[i].champion == element.key) {
@@ -320,12 +328,23 @@ async function getRecentMatches(accId) {
         id = element.id;
       }
     });
+
     matchresp.participantIdentities.forEach(function (e) {
       if (e.player.accountId == accId) {
         Pid = e.participantId - 1;
         stats = matchresp.participants[Pid].stats;
       }
     });
+
+    genStats.kills.push(stats.kills);
+    genStats.deaths.push(stats.deaths);
+    genStats.assists.push(stats.assists);
+    genStats.cs.push(stats.neutralMinionsKilled + stats.totalMinionsKilled);
+    genStats.wins.push(stats.win);
+    genStats.fbs.push(stats.firstBloodKill);
+    genStats.pk.push(stats.pentaKills);
+    genStats.tg.push(stats.goldEarned);
+    genStats.vs.push(stats.visionScore);
 
     recentMatches.insertAdjacentHTML(`beforeend`, `
      <li class="match" id=${i}>
@@ -336,6 +355,15 @@ async function getRecentMatches(accId) {
     </li>`)
   }
 
+  sortGenStats(genStats);
+}
+
+function sortGenStats(genStats) {
+  displayGenStats(genStats);
+}
+
+function displayGenStats(genStats) {
+  console.log(genStats)
 }
 
 searchBar.value = ``;
